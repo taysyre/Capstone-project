@@ -6,13 +6,13 @@ const bodyParser = require('body-parser');
 // Router
 const route = express.Router();
 // Models
-const {User, Product} = require('../model');
+const {User, Product} = require('../model/userModel');
 // Create a user instance
 const user = new User();
 // Product instance
 const product = new Product();
-// ^/$|/jtbookstore
-route.get('^/$|/jtbookstore', (req, res)=>{
+
+route.get('/', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, '../view/index.html'));
 })
 // =========USER's Router========
