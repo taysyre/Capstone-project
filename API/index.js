@@ -9,14 +9,13 @@ const port = process.env.PORT || 6969;
 app.set('port', process.env.PORT || 3000);
 app.use(express.json(), cors());
 
-// Allowing frontend access to backend
 app.use((req, res, next)=> {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header("Access-Control-Allow-Credentials", "true")
-  res.header("Access-Control-Allow-Methods", "*")
-  res.header("Access-Control-Allow-Headers", "*")
-  next();
-});
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header("Access-Control-Allow-Credentials", "true")
+    res.header("Access-Control-Allow-Methods", "*")
+    res.header("Access-Control-Allow-Headers", "*")
+    next();
+  });
 
 // Root Route
 app.get('/', (req, res) => {
