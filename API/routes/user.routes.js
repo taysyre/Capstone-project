@@ -1,21 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controller/userController');
-router.get('^/$|/caffeine', (req,res) => {
-  res.status(200).sendFile(path.join(__dirname, '../view/index.html'))
+
+
+router.get('/', (req, res) => {
+  controller.getProducts(req, res)
 });
+router.post('/', (req, res) => {
+  controller.createProduct(req, res)
+})
+router.get('/:id', (req, res) => {
+  controller.getProduct(req, res)
+})
+router.patch('/:id', (req, res) => {
+  controller.updateProduct(req, res)
+})
+router.delete('/:id', (req, res) => {
+  controller.deleteProduct(req, res)
+})
 
-router.get('/users', controller.getUsers);
-
-router.get('/users/:id', controller.fetchUserById);
-
-router.post('/login', bodyParser.json(), controller.login);
-
-router.post('/register', bodyParser.json(), controller.createUser);
-
-router.patch('/users/:id', bodyParser.json(), controller.updateUser);
-
-router.put('/users/:id', bodyParser.json(), controller.updateUser);
-
-router.delete('/users/:id', controller.deleteUser);
-module.exports = router;
+module.exports = router
