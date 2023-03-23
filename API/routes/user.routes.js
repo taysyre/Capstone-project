@@ -5,7 +5,7 @@ router.get('^/$|/caffeine', (req,res) => {
   res.status(200).sendFile(path.join(__dirname, '../view/index.html'))
 });
 
-router.get('/users', controller.fetchUsers);
+router.get('/users', controller.getUsers);
 
 router.get('/users/:id', controller.fetchUserById);
 
