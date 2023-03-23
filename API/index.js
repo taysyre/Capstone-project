@@ -1,6 +1,9 @@
 const express = require('express');
 // route
-const route = require('./controller');
+const route = require('./controller/orderController');
+const route = require('./controller/postController');
+const route = require('./controller/productController');
+const route = require('./controller/userController');
 // cors
 const cors = require('cors');
 // port 
