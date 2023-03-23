@@ -1,31 +1,34 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const app = express();
-const port = 3500;
+const {userRoutes, orderRoutes, productRoutes} = require('./routes') 
+require('dotenv').config
+const port = process.env.PORT || 6969;
 
-const {errorHandling} = require('./middleware/ErrorHandlling');
-const routes = require('./routes/product.routes');
+app.set('port', process.env.PORT || 3000);
+app.use(express.json(), cors());
 
-app.use(cors());
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({extended:false}));
-app.use(bodyParser.json());
-
-app.use((req,res,next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', '*');
-    res.header('Access-Control-Allow-Headers', '*');
-    next();
+// Allowing frontend access to backend
+app.use((req, res, next)=> {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header("Access-Control-Allow-Credentials", "true")
+  res.header("Access-Control-Allow-Methods", "*")
+  res.header("Access-Control-Allow-Headers", "*")
+  next();
 });
 
-app.use(routes);
+// Root Route
+app.get('/', (req, res) => {
+  res.status(200);
+  res.sendFile(path.join(__dirname, '/view/index.html'));
+})
+// Use router to handle product and user routes
+app.use('/users', userRoutes);
+app.use('/products', productRoutes);
+
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-});
-
-// app.use(errorHandling);
+  console.log('Server is running...');
+  console.log(`Listening on port ${port}...`);
+})

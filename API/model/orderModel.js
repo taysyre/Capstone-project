@@ -11,7 +11,7 @@ module.exports = {
   },
   getOrders(req, res) {
     const orderInfo = req.body
-    con.query("SELECT * FORM `user ? cart`;", [orderInfo.userID], (err, result) => {
+    con.query("SELECT * FORM `users ? cart`;", [orderInfo.userID], (err, result) => {
       if (err) throw err;
       res.status(200);
       res.send(result);
@@ -19,7 +19,7 @@ module.exports = {
   },
   addToCart(req, res) {
     const orderData = req.body
-    con.query("SELECT orderID FROM orders WHERE prodID = ?", [orderData.prodID], (err, result) => {
+    con.query("SELECT orderID FROM orders WHERE productID = ?", [orderData.productID], (err, result) => {
       if (err) throw err;
       if (result) {
         this.incrementOrder(req, res)
