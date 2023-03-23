@@ -12,6 +12,7 @@ app.use(express.json(), cors());
 // Allowing frontend access to backend
 app.use((req, res, next)=> {
   res.header('Access-Control-Allow-Origin', 'http://localhost:8082')
+  res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Credentials", "true")
   res.header("Access-Control-Allow-Methods", "*")
   res.header("Access-Control-Allow-Headers", "*")
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 // Use router to handle product and user routes
 app.use('/users', userRoutes);
 app.use('/products', productRoutes);
+app.use('/orders', orderRoutes)
 
 
 app.listen(port, () => {
