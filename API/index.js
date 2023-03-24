@@ -1,9 +1,8 @@
 const express = require('express');
 // route
-const route = require('./controller/orderController');
-const route = require('./controller/postController');
-const route = require('./controller/productController');
-const route = require('./controller/userController');
+const {userRoutes, orderRoutes, productRoutes} = require('./routes') 
+require('dotenv').config
+
 // cors
 const cors = require('cors');
 // port 
@@ -30,11 +29,15 @@ app.use(
     express.json,
     express.urlencoded({extended: false})
 )
+app.use('/users', userRoutes);
+app.use('/products', productRoutes);
+app.use('/orders', orderRoutes)
 
 // Server is running
 app.listen(port, ()=> {
     console.log(`Server is running...`);
     console.log(`Listening on port ${port}...`);
 });
+
 // Handling all errors
 app.use(errorHandling);
