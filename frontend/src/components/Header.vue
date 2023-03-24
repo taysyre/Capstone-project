@@ -60,11 +60,11 @@
               /></router-link>
             </li>
             <li>
-              <router-link to="../register"
-                >Sign-Up<img
+              <router-link to="../About"
+                >About<img
                   class="H_img"
-                  src="https://img.icons8.com/material-rounded/24/FFFFFF/writer-male.png"
-              /></router-link>
+                  src="https://img.icons8.com/material-rounded/24/FFFFFF/info.png"/>
+              </router-link>
             </li>
           </ul>
         </ul>

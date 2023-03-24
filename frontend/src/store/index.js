@@ -1,7 +1,8 @@
+
 import { createStore } from 'vuex'
 import axios from 'axios';
 
-const renderLink = 'https://lost-in-harmony.onrender.com/'
+const renderLink = 'https://lost-in-harmony.onrender.com'
 
 export default createStore({
   state: {
@@ -103,6 +104,7 @@ export default createStore({
         context.commit('setSpinner', false);
       } else context.commit('setMessage', err);
     }, 
+    
     async fetchProductById(context, id){
       const res = await axios.get(`${renderLink}/products/${id}`);
       const {err,results} = await res.data;

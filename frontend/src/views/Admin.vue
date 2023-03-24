@@ -42,19 +42,19 @@
                     <tr>
                         <th class="lead fw-bold">Name</th>
                         <th class="d-none d-sm-table-cell lead fw-bold">Description</th>
-                        <th class="lead fw-bold">Price</th>
-                        <th class="lead fw-bold">Quantity</th>
+                        <th class="lead fw-bold">Price</th> 
+                        <th class="lead fw-bold">Stock</th>
                         <th class="lead d-none d-sm-table-cell fw-bold">Image</th>
                         <th class="lead fw-bold">Edit/Del</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="product in products" :key="product">
-                        <td>{{ product.prodName }}</td>
-                        <td class="d-none d-sm-table-cell">{{ product.prodDescription }}</td>
+                        <td>{{ product.productName }}</td>
+                        <td class="d-none d-sm-table-cell">{{ product.description }}</td>
                         <td>R{{ product.price }}</td>
-                        <td>{{ product.quantity }}</td>
-                        <td class="d-none d-sm-table-cell"><img :src="product.prodImg" :alt="product.prodName" width="85" height="75"></td>
+                        <td>{{ product.stock }}</td>
+                        <td class="d-none d-sm-table-cell"><img :src="product.ImgURL" :alt="product.productName" width="85" height="75"></td>
                         <td>
                                 <UpdateProduct :product="product" class="btn btn-dark"/>
                                 <button class="btn btn-danger" v-on:click="deleteProduct(product)">Del</button>
@@ -81,9 +81,10 @@
                 <tbody>
                     <tr v-for="user in users" :key="user">
                         <td>{{ user.firstName }} {{ user.lastName }}</td>
-                        <td>{{ user.userEmail }}</td>
-                        <td>{{ user.userRole }}</td>
-                        <td class="d-none d-sm-table-cell">{{ user.joinDate }}</td>
+                        <td>{{ user.gender }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.password }}</td>
+                        <!-- <td class="d-none d-sm-table-cell">{{ user.joinDate }}</td> -->
                         <td class="d-none d-sm-table-cell"><img class="rounded-circle" :src="user.userProfile" :alt="user.firstName + ' ' + user.lastName" width="85" height="75"></td>
                         <td>
                                 <UpdateUser :userDetails="user" class="btn btn-dark"/>
