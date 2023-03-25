@@ -1,162 +1,171 @@
-<!-- <template lang="">
-    <spinner v-if="showSpinner"/>
-    <div v-else>
-      <user_component/>
-      <product></product>
+<template>
+    <br>
+    <br>
+    <br>
+    <br>
+    <SpinnerVue v-if="showSpinner"/>
+    <div class="admin-container" v-else>
+      <h2>Products</h2>
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">
+              #
+              <button class="sort-btn" onclick="sortList()" value="numUp">
+                Price:
+                <img
+                  src="https://img.icons8.com/material-outlined/24/null/numerical-sorting-12.png"
+                />
+              </button>
+            </th>
+            <th scope="col">Product Name</th>
+            <th scope="col">description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody v-for="product in products" :key="product.prodID" class="products-table">
+          <tr id="item-row-{{product.prodID}}">
+            <th scope="row">{{product.productID}}</th>
+            <td>{{product.productName}}</td>
+            <td>R{{product.price}}</td>
+            <td>{{product.stock}}</td>
+            <td>
+              <button
+                style="background-color: rgba(255, 255, 255, 0); border: none"
+                class="edit-item"
+                data-bs-toggle="modal"
+                data-bs-target="#edit-modal-{{product.prodID}}"
+                id="edit-modal-btn-{{product.prodID}}"
+              >
+                <img
+                  style="height: 30px"
+                  src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/FFFFFF/external-edit-interface-kiranshastry-lineal-kiranshastry.png"
+                />
+              </button>
+            </td>
+            <td>
+              <button
+                style="background-color: rgba(255, 255, 255, 0); border: none"
+                class="del-item"
+                onclick="itemRemove({{product.id - 1}})"
+              >
+                <img
+                  style="height: 30px"
+                  src="https://img.icons8.com/material-rounded/48/FFFFFF/trash.png"
+                />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+    
+        <tfoot></tfoot>
+      </table>
+  
+      <h2>Users</h2>
+      <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">
+            #
+            <button class="sort-btn" onclick="sortList()" value="numUp">
+              Price:
+              <img
+                src="https://img.icons8.com/material-outlined/24/null/numerical-sorting-12.png"
+              />
+            </button>
+          </th>
+          <th scope="col">Username</th>
+          <th scope="col">Name</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Email</th>
+          <th scope="col">Password</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody v-for="user in users" :key="user.userID" class="products-table">
+        <tr id="item-row-{{user.userID}}">
+          <th scope="row">{{user.userID}}</th>
+          <td>{{user.username}}</td>
+          <td>{{user.firstName}} {{ user.lastName }}</td>
+          <td>{{user.gender }}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.password}}</td>
+          <td>
+            <button
+              style="background-color: rgba(255, 255, 255, 0); border: none"
+              class="edit-item"
+              data-bs-toggle="modal"
+              data-bs-target="#edit-modal-{{product.prodID}}"
+              id="edit-modal-btn-{{product.prodID}}"
+            >
+              <img
+                style="height: 30px"
+                src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/FFFFFF/external-edit-interface-kiranshastry-lineal-kiranshastry.png"
+              />
+            </button>
+          </td>
+          <td>
+            <button
+              style="background-color: rgba(255, 255, 255, 0); border: none"
+              class="del-item"
+              onclick="itemRemove({{product.id - 1}})"
+            >
+              <img
+                style="height: 30px"
+                src="https://img.icons8.com/material-rounded/48/FFFFFF/trash.png"
+              />
+            </button>
+          </td>
+        </tr>
+      </tbody>
+  
+      <tfoot></tfoot>
+    </table>
+  
     </div>
   </template>
-  <script>
-  import user_component from "../components/UserCRUD.vue";
-  import product_component from "../components/ProductsCRUD.vue";
-  import Spinner_component from "../components/Spinner.vue";
   
-  import { computed } from "@vue/runtime-core";
-  import { useStore } from "vuex";
+  <script>
+  import Spinner_component from '@/components/Spinner.vue'
   export default {
     components: {
-      user_component,
-      product_component,
-      Spinner_component,
+        Spinner_component
     },
-    setup() {
-      const store = useStore();
-      store.dispatch("fetchProducts");
-      store.dispatch("fetchUsers");
-      const showSpinner = computed(() => store.state.showSpinner);
-      return {
-        showSpinner,
-      };
+    computed: {
+      products() {
+        return this.$store.state.products
+      },
+      users() {
+        return this.$store.state.users
+      },
+      setSpinner(){
+        if(this.$store.state.products && this.$store.state.users) {
+          this.$store.commit("setSpinner", false)
+        }
+      },
+      showSpinner() {
+        this.setSpinner
+        return this.$store.state.showSpinner
+      }
+    },
+    created() {
+      this.$store.dispatch('fetchProducts')
+      this.$store.dispatch('fetchUsers')
     },
   };
   </script>
-  <style lang=""></style> -->
-  <template>
-    <div v-if="spinner" class="admin d-flex justify-content-center">
-        <SpinnerComponent/>
-    </div>
-    <div v-else-if="!spinner" class="admin">
-        <div class="productsTable"> 
-            <h2 class="display-5 fw-bold">Products Table</h2>
-            <table class="table table-hover table-striped table-dark mx-auto">
-                <thead>
-                    <tr>
-                        <th class="lead fw-bold">Name</th>
-                        <th class="d-none d-sm-table-cell lead fw-bold">Description</th>
-                        <th class="lead fw-bold">Price</th> 
-                        <th class="lead fw-bold">Stock</th>
-                        <th class="lead d-none d-sm-table-cell fw-bold">Image</th>
-                        <th class="lead fw-bold">Edit/Del</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="product in products" :key="product">
-                        <td>{{ product.productName }}</td>
-                        <td class="d-none d-sm-table-cell">{{ product.description }}</td>
-                        <td>R{{ product.price }}</td>
-                        <td>{{ product.stock }}</td>
-                        <td class="d-none d-sm-table-cell"><img :src="product.ImgURL" :alt="product.productName" width="85" height="75"></td>
-                        <td>
-                                <UpdateProduct :product="product" class="btn btn-dark"/>
-                                <button class="btn btn-danger" v-on:click="deleteProduct(product)">Del</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <AddProduct class="btn btn-primary p-0 mb-5"/>
-        </div>
-
-        <div class="usersTable pb-2">
-            <h2 class="display-5 fw-bold">Users Table</h2>
-            <table class="table table-hover table-striped table-dark mx-auto">
-                <thead>
-                    <tr>
-                        <th class="lead fw-bold">Name</th>
-                        <th class="lead fw-bold">Email Address</th>
-                        <th class="lead fw-bold">Role</th>
-                        <th class="lead d-none d-sm-table-cell fw-bold">Join Date</th>
-                        <th class="lead d-none d-sm-table-cell fw-bold">Profile Image</th>
-                        <th class="lead fw-bold">Edit/Del</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="user in users" :key="user">
-                        <td>{{ user.firstName }} {{ user.lastName }}</td>
-                        <td>{{ user.gender }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.password }}</td>
-                        <!-- <td class="d-none d-sm-table-cell">{{ user.joinDate }}</td> -->
-                        <td class="d-none d-sm-table-cell"><img class="rounded-circle" :src="user.userProfile" :alt="user.firstName + ' ' + user.lastName" width="85" height="75"></td>
-                        <td>
-                                <UpdateUser :userDetails="user" class="btn btn-dark"/>
-                                <button class="btn btn-danger">Del</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <AddUser class="btn btn-primary p-0"/>
-        </div>
-    </div>
-</template>
-
-<script>
-import { useStore } from 'vuex';
-import {computed} from '@vue/runtime-core';
-import UpdateProduct from '../components/UpdateProduct.vue';
-import AddProduct from '../components/AddProduct.vue';
-import UpdateUser from '../components/UpdateUser.vue';
-import AddUser from '../components/AddUser.vue';
-import SpinnerComponent from '../components/Spinner.vue';
-
-export default{
-    setup(){
-        const store = useStore();
-        store.dispatch('fetchUsers');
-        store.dispatch('fetchProducts');
-
-        const users = computed(() => store.state.users);
-        const products = computed(() => store.state.products);
-        
-        const userLoggedIn =JSON.parse(localStorage.getItem('user'));
-        let user = userLoggedIn == null || userLoggedIn == undefined ? null: userLoggedIn;
-
-
-        let deleteProduct = async (product) => {
-            await store.dispatch('deleteProduct', product.prodID);
-            await store.dispatch('fetchProducts');
-        }
-        const spinner = computed(() => store.state.spinner);
-        return{
-            user,
-            users,
-            userLoggedIn,
-            products,
-            deleteProduct,
-            spinner
-        }
-    },
-    components: {
-        UpdateProduct,
-        AddProduct,
-        UpdateUser,
-        AddUser,
-        SpinnerComponent
+  <style>
+    .admin-container {
+      color: white;
+      margin-bottom: 30px;
     }
-}
-</script>
-
-<style scoped>
-.admin{
-    /* background-image: url('../assets/digitalcoffee.png'); */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    min-height: 100vh;
-    padding: 5em 0 2em 0;
-
-    color: #ff9a3c;
-}
-table{
-    width: 95%;
-    min-width: 100px;
-}
-</style>
+    .table {
+      width: 80%;
+      margin: auto;
+      background-color: transparent;
+    }
+  </style>

@@ -220,8 +220,10 @@
           <input type="email" name="userEmail" id="userEmail" class="form-control w-50 mx-auto mb-2" required placeholder="Enter Your Email Address..." v-model="signInPayload.userEmail">
           <label for="userPass" class="mt-3 lead">Password</label>
           <input type="password" name="userPass" id="userPass" class="form-control w-50 mx-auto mb-5" required placeholder="Enter Your Password..." v-model="signInPayload.userPass">
-          <button class="btn btn-dark mb-3 me-1 mt-4" v-on:click.prevent="userSignIn(signInPayload)">Sign In</button>
-          <button class="btn btn-danger mb-3 mt-4" v-on:click.prevent="changeSign()">Sign Up</button>
+          <button class="BTN2" v-on:click.prevent="userSignIn(signInPayload)">Sign In</button>
+          <button class="BTN" v-on:click.prevent="changeSign()">Sign Up</button>
+          <br>
+          <br>
       </form>
 
       <form v-if="!signIn && user == null && !spinner" class="signUp">
@@ -234,8 +236,10 @@
           <input class="form-control w-50 mx-auto mb-2" type="email" name="email" id="email" placeholder="Enter Your Email Address..." v-model="signUpPayload.userEmail">
           <label class="mt-3 lead" for="userPass">Password</label>
           <input class="form-control w-50 mx-auto mb-2" type="password" name="userPass" id="userPass" required placeholder="Enter Your Password..." v-model="signUpPayload.userPass">
-          <button class="btn btn-dark mb-3 me-1 mt-4" v-on:click.prevent="userSignUp(signUpPayload)">Sign Up</button>
-          <button class="btn btn-danger mb-3 mt-4" v-on:click.prevent="changeSign()">Sign In</button>
+          <button class="BTN2" v-on:click.prevent="userSignUp(signUpPayload)">Sign Up</button>
+          <button class="BTN" v-on:click.prevent="changeSign()">Sign In</button>
+          <br>
+          <br>
       </form>
 
       <div v-if="user !== null && !spinner" class="userSignedIn">
@@ -260,6 +264,55 @@
   width: 50%;
   margin: 0 auto;
 }
+
+.BTN, .BTN2 {
+  position: relative;
+  display: inline-block;
+  padding: 8px 15px;
+  font-weight: bold;
+  color: #000000;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 3px
+}
+.BTN{
+  background-color: rgb(109, 235, 74);
+}
+.BTN2{
+  background-color: rgb(235, 224, 224);
+}
+.BTN:hover {
+  background: #03f40f;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03f40f,
+              0 0 25px #03f40f,
+              0 0 50px #03f40f,
+              0 0 100px #03f40f;
+}
+.BTN2:hover{
+  background: #03f40f;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03f40f,
+              0 0 25px #03f40f,
+              0 0 50px #03f40f,
+              0 0 100px #03f40f;
+}
+/* .BTN{
+  color: #fff;
+  text-decoration: none;
+}
+.BTN2 {
+  color: #e71f1f;
+  text-decoration: none;
+} */
+
+
 
 </style>
 

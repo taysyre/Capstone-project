@@ -70,20 +70,21 @@
         </ul>
       </div>
     </div>
+    <router-link to="../Cart"
+                ><img
+                  src="https://img.icons8.com/material-rounded/24/FFFFFF/shopping-cart.png"/>
+              </router-link>
     <div class="socials d-flex justify-content-right align-items-center mx-4">
-      <a href=""
-        ><img
-          src="https://img.icons8.com/material-rounded/24/FFFFFF/shopping-cart.png"
-      /></a>
-      <a href=""
+
+      <a href="https://www.instagram.com/tyvonapril077/"
         ><img
           src="https://img.icons8.com/material-rounded/24/FFFFFF/instagram-new.png"
       /></a>
-      <a href=""
+      <a href="https://en-gb.facebook.com/tyvon.april.12/"
         ><img
           src="https://img.icons8.com/material-rounded/24/FFFFFF/facebook-new.png"
       /></a>
-      <a href=""
+      <a href="https://twitter.com/TayApril1"
         ><img src="https://img.icons8.com/material-sharp/24/FFFFFF/twitter.png"
       /></a>
     </div>

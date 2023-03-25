@@ -5,23 +5,21 @@
     <br>
     <div class="products">
 
-    <!-- <img class="ProdBanner" src="https://i.postimg.cc/13psMhYM/your-lie-in-april-piano.gif"> -->
-    <!-- <img src="https://i.postimg.cc/TPv5nxqP/banner-slider1.jpg"> -->
-      <div>
+      <!-- <div>
       <input v-model="filterText" type="text" placeholder="Search...">
       <ul>
         <li v-for="item in filteredItems" :key="item.id">
           {{ item.name }}
         </li>
       </ul>
-      </div>
+      </div> -->
       <br>
       
     <div class="row products-container">
   
   <div v-for="product in filterItems" :key="product.productID" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
     <div class="card m-auto">
-      <img :src="product.imgURL" class="card-img-top" :alt="product.prodName">
+      <img :src="product.ImgURL" class="card-img-top" :alt="product.productName">
       <div class="card-body">
         <h5 class="card-title">{{product.productName.slice(0, 27)}} ...</h5>
         <p class="card-text my-0">Author: {{product.description}}</p>
